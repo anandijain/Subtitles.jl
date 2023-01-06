@@ -1,0 +1,8 @@
+name = "Subtitles"
+uuid = "01768123-4864-4971-be3c-4307d34eee02"
+authors = ["anand jain <33790004+anandijain@users.noreply.github.com>"]
+version = "0.1.0"
+
+[deps]
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
