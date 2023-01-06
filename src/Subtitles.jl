@@ -4,8 +4,8 @@ using Dates
 
 # Struct to store a single subtitle
 mutable struct Subtitle
-    start_time::DateTime
-    end_time::DateTime
+    start_time::Dates.AbstractTime
+    end_time::Dates.AbstractTime
     text::String
 end
 
@@ -49,7 +49,7 @@ function parse_srt(filepath::String)
             i += 1
             # Parse the timecodes line
             timecodes_line = lines[i]
-            start_time, end_time = map(x -> DateTime(string(x), time_format), split(timecodes_line, " --> "))
+            start_time, end_time = map(x -> Time(string(x), time_format), split(timecodes_line, " --> "))
             current_subtitle = Subtitle(start_time, end_time, "")
             i += 1
             # Parse the text lines
