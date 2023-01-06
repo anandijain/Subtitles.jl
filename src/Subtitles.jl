@@ -19,7 +19,7 @@ function parse_vtt(filepath::String)
         line = lines[i]
         # if startswith(line, "-->")
         # Parse the start and end timecodes
-        start_time, end_time = map(x -> Date(x, time_format), split(line, " --> "))
+        start_time, end_time = map(x -> DateTime(x, time_format), split(line, " --> "))
         # Initialize the subtitle text
         text = ""
         # Concatenate the text lines until the next timecodes line is reached
@@ -42,15 +42,14 @@ function parse_srt(filepath::String)
     lines = readlines(filepath)
     i = 1
     # Create a DateFormat object for parsing the timecodes
-    time_format = DateFormat("HH:MM:SS,SSS")
+    time_format = DateFormat("HH:MM:SS,sss") # 00:00:00,000 --> 00:00:05,000
     while i <= length(lines)
         # Parse the index line
         if occursin(r"^\d+$", lines[i])
             i += 1
             # Parse the timecodes line
             timecodes_line = lines[i]
-            print(timecodes_line)
-            start_time, end_time = map(x -> Date(string(x),time_format), split(timecodes_line, " --> "))
+            start_time, end_time = map(x -> DateTime(string(x), time_format), split(timecodes_line, " --> "))
             current_subtitle = Subtitle(start_time, end_time, "")
             i += 1
             # Parse the text lines
